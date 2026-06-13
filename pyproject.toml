@@ -1,0 +1,18 @@
+[project]
+name = "ai-predictive-maintenance-deployment-toolkit"
+version = "0.1.0"
+description = "A portfolio-ready predictive maintenance demo with RUL modelling, Streamlit monitoring, and deployment governance templates."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "streamlit>=1.36",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
