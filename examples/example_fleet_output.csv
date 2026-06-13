@@ -1,0 +1,4 @@
+unit_id,cycle,predicted_rul,prediction_interval_low,prediction_interval_high,failure_risk,maintenance_action
+1,119,22.6,10.3,37.9,high,Plan intervention in next maintenance window
+2,77,48.8,34.1,65.2,medium,Inspect and monitor trend weekly
+3,35,91.4,74.5,108.7,low,Continue routine monitoring
