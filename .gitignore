@@ -11,9 +11,11 @@ artifacts/*.json
 data/raw/*.csv
 data/processed/*.csv
 data/external/*
+data/rag_index/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/external/.gitkeep
+!data/rag_index/.gitkeep
 
 .DS_Store
 Thumbs.db
