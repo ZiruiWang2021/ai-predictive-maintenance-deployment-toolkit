@@ -1,0 +1,162 @@
+[
+  {
+    "id": "q001",
+    "question": "What should I check if the motor temperature rises abnormally?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["motor_overheating_guide.md"],
+    "agent_request": {"asset_id": 42, "user_task": "Diagnose abnormal motor temperature", "fault_description": "Motor temperature is rising and vibration alarm triggered.", "sensor_readings": {"cycle": 140, "temperature": 92, "vibration": 8.2, "current": 132, "asset_class": "route-critical"}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q002",
+    "question": "A bearing shows increasing vibration and heat. What diagnostic checks are recommended?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["bearing_fault_guide.md"],
+    "agent_request": {"asset_id": 18, "user_task": "Assess bearing vibration trend", "fault_description": "Bearing vibration has increased and bearing temperature is elevated.", "sensor_readings": {"cycle": 118, "bearing_temperature": 86, "vibration": 7.4}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q003",
+    "question": "How should I validate a sudden sensor spike before calling it a real fault?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["sensor_anomaly_guide.md"],
+    "agent_request": {"asset_id": 7, "user_task": "Investigate sudden sensor anomaly", "fault_description": "One sensor jumped sharply for a single cycle.", "sensor_readings": {"cycle": 75, "sensor_03": 1880, "temperature": 73}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q004",
+    "question": "What does a low Remaining Useful Life prediction mean for maintenance planning?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["maintenance_policy.md", "cmapss_engine_fault_notes.md"],
+    "agent_request": {"asset_id": 51, "user_task": "Explain maintenance planning action for low predicted RUL", "fault_description": "Predicted RUL is low on a route-critical asset.", "sensor_readings": {"cycle": 165, "sensor_01": 802, "sensor_05": 89, "sensor_09": 6.1}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q005",
+    "question": "When should a high-risk recommendation require human approval?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["maintenance_policy.md"],
+    "agent_request": {"asset_id": 61, "user_task": "Check governance for a high-risk maintenance recommendation", "fault_description": "Dashboard shows high risk and intervention may disrupt service.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q006",
+    "question": "How are C-MAPSS-style degradation notes useful for RUL prediction?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["cmapss_engine_fault_notes.md"],
+    "agent_request": {"asset_id": 12, "user_task": "Summarise C-MAPSS degradation patterns", "fault_description": "Use this for model explanation rather than immediate maintenance.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q007",
+    "question": "What should I inspect if cooling airflow is low and the motor is overheating?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["motor_overheating_guide.md"],
+    "agent_request": {"asset_id": 23, "user_task": "Diagnose overheating with reduced airflow", "fault_description": "Cooling airflow appears low and motor temperature is high.", "sensor_readings": {"cycle": 122, "temperature": 91, "airflow": 410, "current": 116}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q008",
+    "question": "If current is high and motor temperature is elevated, what does that suggest?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["motor_overheating_guide.md"],
+    "agent_request": {"asset_id": 24, "user_task": "Classify risk from high current and elevated motor temperature", "fault_description": "Current is above normal and temperature is rising.", "sensor_readings": {"cycle": 130, "temperature": 82, "current": 128}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q009",
+    "question": "How should a maintenance team treat a single impossible sensor reading?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["sensor_anomaly_guide.md"],
+    "agent_request": {"asset_id": 9, "user_task": "Investigate impossible sensor value", "fault_description": "The temperature sensor reported an impossible value for one record.", "sensor_readings": {"cycle": 64, "temperature": "not_available", "sensor_05": 999}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q010",
+    "question": "What is recommended when sensors are normal and no fault is reported?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 33, "user_task": "Assess routine asset health with no reported fault", "fault_description": null, "sensor_readings": {"cycle": 45, "temperature": 62, "vibration": 1.8, "current": 84}},
+    "expected_tools": ["analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q011",
+    "question": "What checks are useful when vibration increases after lubrication work?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["bearing_fault_guide.md"],
+    "agent_request": {"asset_id": 44, "user_task": "Diagnose vibration after lubrication work", "fault_description": "Vibration increased after lubrication and bearing noise is reported.", "sensor_readings": {"cycle": 101, "vibration": 5.4, "bearing_temperature": 78}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q012",
+    "question": "What should I do when model risk is high but sensor data is stale?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["maintenance_policy.md", "sensor_anomaly_guide.md"],
+    "agent_request": {"asset_id": 52, "user_task": "Decide next action when high risk is based on stale sensor data", "fault_description": "High risk is shown, but latest sensor data may be stale.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q013",
+    "question": "How can retrieved manual evidence support a maintenance planner decision?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["maintenance_policy.md"],
+    "agent_request": {"asset_id": 66, "user_task": "Explain how manual evidence should support a maintenance decision", "fault_description": "Planner needs traceable evidence before approving intervention.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q014",
+    "question": "What symptoms suggest compressor or engine degradation in C-MAPSS-style data?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["cmapss_engine_fault_notes.md"],
+    "agent_request": {"asset_id": 31, "user_task": "Diagnose possible engine degradation pattern", "fault_description": "Sensor drift suggests compressor wear in a C-MAPSS-style example.", "sensor_readings": {"cycle": 152, "sensor_01": 790, "sensor_02": 1740, "sensor_11": 660}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q015",
+    "question": "What warranty claim form should be used for a failed gearbox replacement?",
+    "requires_uncertainty": true,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 81, "user_task": "Find warranty claim process for failed gearbox replacement", "fault_description": "The team wants warranty paperwork rather than diagnosis.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q016",
+    "question": "How do I reset the password for the maintenance dashboard admin account?",
+    "requires_uncertainty": true,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 82, "user_task": "Answer a dashboard password reset question", "fault_description": "This is an access management issue, not an equipment fault.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q017",
+    "question": "What should I do for suspected hydraulic pump cavitation in the lift system?",
+    "requires_uncertainty": true,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 83, "user_task": "Diagnose suspected hydraulic pump cavitation", "fault_description": "Operator reports pump cavitation noise in a lift system.", "sensor_readings": {"cycle": 88, "pressure": 1300, "vibration": 4.6}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q018",
+    "question": "What is the spare part procurement lead time for a replacement motor bearing?",
+    "requires_uncertainty": true,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 84, "user_task": "Estimate spare part procurement lead time for motor bearing", "fault_description": "Planner asks for procurement lead time, not diagnostic guidance.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q019",
+    "question": "What does a fire suppression panel alarm mean for this predictive maintenance model?",
+    "requires_uncertainty": true,
+    "expected_rag_sources": [],
+    "agent_request": {"asset_id": 85, "user_task": "Interpret fire suppression panel alarm in predictive maintenance context", "fault_description": "A building safety panel alarm is active.", "sensor_readings": null},
+    "expected_tools": ["retrieve_manual_knowledge", "classify_risk", "generate_maintenance_report"]
+  },
+  {
+    "id": "q020",
+    "question": "How should I respond when vibration, bearing temperature, and RUL all indicate deterioration?",
+    "requires_uncertainty": false,
+    "expected_rag_sources": ["bearing_fault_guide.md", "maintenance_policy.md"],
+    "agent_request": {"asset_id": 90, "user_task": "Recommend action for combined bearing deterioration indicators", "fault_description": "Vibration, bearing temperature, and predicted RUL all point to deterioration.", "sensor_readings": {"cycle": 171, "vibration": 8.6, "bearing_temperature": 94, "sensor_01": 810}},
+    "expected_tools": ["retrieve_manual_knowledge", "analyse_sensor_data", "predict_rul", "classify_risk", "generate_maintenance_report"]
+  }
+]
