@@ -8,6 +8,8 @@ dependencies = [
   "numpy>=1.26",
   "pandas>=2.2",
   "streamlit>=1.36",
+  "fastapi>=0.111",
+  "uvicorn[standard]>=0.30",
 ]
 
 [tool.setuptools.packages.find]
