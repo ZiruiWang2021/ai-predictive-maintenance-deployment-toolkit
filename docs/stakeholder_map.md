@@ -17,3 +17,13 @@
 - Technical working group: weekly. / 技术工作组每周一次。
 - Planner UAT: at each dashboard release candidate. / 每个 dashboard release candidate 进行计划人员 UAT。
 - Post-pilot review: after four weeks of shadow-mode operation. / Shadow-mode 运行四周后进行试点复盘。
+
+## Communication Plan / 沟通计划
+
+| Audience / 对象 | Channel / 渠道 | Frequency / 频率 | Content / 内容 | Owner / 负责人 |
+|---|---|---|---|---|
+| Senior sponsor / 项目负责人 | Steering update deck / Steering 汇报 | Fortnightly / 每两周 | Scope, budget, key risks, go/no-go readiness / 范围、预算、关键风险、go/no-go 准备度 | PM |
+| Maintenance planners / 维护计划人员 | UAT workshop / UAT 工作坊 | Every release candidate / 每个候选版本 | Dashboard workflow, recommendation clarity, override feedback / Dashboard 流程、建议清晰度、override 反馈 | Product / PM |
+| Asset engineers / 资产工程师 | Technical review / 技术评审 | Weekly during modelling / 建模阶段每周 | Features, RUL assumptions, risk thresholds, failure modes / 特征、RUL 假设、风险阈值、故障模式 | Data scientist |
+| Data engineering / 数据工程 | Data readiness stand-up / 数据准备站会 | Weekly / 每周 | Source readiness, schema changes, data quality issues / 数据源就绪、schema 变化、数据质量问题 | Data engineer |
+| Safety and compliance / 安全与合规 | Approval gate / 审批节点 | Go/no-go gates / go/no-go 节点 | Intended use, limitations, human approval, rollback / 预期用途、局限性、人工审批、回滚 | Governance lead |
