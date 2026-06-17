@@ -4,22 +4,24 @@ FastAPI + RAG + ReACT-style Agent system for industrial equipment fault diagnosi
 
 面向工业设备故障诊断和维护决策支持的 AI 应用：结合 FastAPI、RAG、ReACT-style Agent、传感器数据分析和 RUL 预测。
 
+中文版本: [README.zh-CN.md](README.zh-CN.md)
+
 ![Dashboard preview](docs/assets/dashboard_preview.svg)
 
 ## Project Overview / 项目概览
 
-This project demonstrates how a predictive maintenance workflow can move from sensor data and maintenance documents to actionable maintenance recommendations.
+This project demonstrates how a predictive maintenance workflow can move from sensor data and maintenance documents to actionable maintenance recommendations. The deployment scenario is framed as a Network Rail-style 36-week pilot covering 100 railway infrastructure assets.
 
 The system can:
 
 - analyse equipment sensor readings;
 - predict Remaining Useful Life (RUL);
-- retrieve relevant maintenance knowledge from synthetic demo manuals;
+- retrieve relevant maintenance knowledge from synthetic demo manuals, fault case notes, and project delivery documents;
 - classify operational risk as `Low`, `Medium`, `High`, or `Unknown`;
 - generate a structured maintenance recommendation through a ReACT-style Agent workflow;
 - expose the workflow through a FastAPI backend and a Streamlit dashboard.
 
-本项目展示一个预测性维护 AI 系统如何从传感器数据和维护文档出发，生成可解释的维护建议。系统支持传感器异常分析、RUL 预测、RAG 文档检索、风险分级和结构化维护报告。
+本项目展示一个预测性维护 AI 系统如何从传感器数据和维护文档出发，生成可解释的维护建议。部署场景设定为类似 Network Rail 的 36 周试点，覆盖 100 个铁路基础设施资产。系统支持传感器异常分析、RUL 预测、RAG 文档检索、风险分级和结构化维护报告。
 
 ## Why It Matters / 项目价值
 
@@ -51,13 +53,14 @@ flowchart LR
 
 ## Features / 功能
 
-- **RUL prediction**: trains and uses a transparent predictive maintenance model from CMAPSS-style sensor data.
+- **RUL prediction**: trains and uses a transparent predictive maintenance model from CMAPSS-style time-series sensor data.
 - **Sensor analysis**: detects abnormal temperature, vibration, current, and sensor drift patterns.
-- **RAG knowledge base**: retrieves maintenance context from documents in `data/manuals/`.
+- **Time-series feature modelling**: builds rolling means, rolling standard deviations, deltas, and degradation ratios before RUL prediction.
+- **RAG knowledge base**: retrieves maintenance context from maintenance guides, fault case notes, and delivery governance documents in `data/manuals/`.
 - **ReACT-style Agent**: records reasoning, action, observation, and final answer steps.
 - **FastAPI backend**: provides `/health`, `/rag/query`, and `/agent/run` endpoints.
 - **Evaluation module**: checks RAG and Agent outputs using transparent rule-based tests.
-- **Deployment documentation**: includes WBS, risk register, go/no-go checklist, stakeholder map, runbook, and model card.
+- **Deployment documentation**: includes 36-week pilot plan, 100-asset scope, budget, WBS, risk register, communication plan, go/no-go checklist, stakeholder map, runbook, and model card.
 - **Portfolio-ready presentation**: includes architecture, examples, limitations, future work, tests, and GitHub Actions CI.
 
 ## Tech Stack / 技术栈
@@ -81,7 +84,7 @@ flowchart LR
 |   |-- main.py                # FastAPI backend
 |   `-- streamlit_app.py       # Streamlit dashboard
 |-- data/
-|   |-- manuals/               # Synthetic demo maintenance documents
+|   |-- manuals/               # Synthetic demo manuals, fault cases, and delivery documents
 |   |-- raw/                   # Generated or prepared sensor logs
 |   `-- processed/             # Feature tables and predictions
 |-- docs/                      # Deployment and project governance documents
@@ -271,6 +274,7 @@ http://127.0.0.1:8000/docs
 
 - The sensor data and maintenance manuals included in this repo are synthetic demo assets.
 - The RUL model is intentionally transparent and lightweight; production systems may require richer sequence models and calibration.
+- Time-series modelling is implemented through rolling-window feature engineering rather than an LSTM/Transformer sequence model.
 - The local RAG retriever is designed for reproducibility, not maximum retrieval performance.
 - The Agent is deterministic and maintainable, but does not use an external orchestration framework.
 - Recommendations are decision support only and do not replace OEM manuals, safety procedures, or qualified engineering judgement.
@@ -304,6 +308,7 @@ This project demonstrates the following AI Development Engineer skills:
 
 - `docs/blog.md`
 - `docs/architecture.md`
+- `docs/pilot_deployment_plan.md`
 - `docs/deployment_runbook.md`
 - `docs/risk_register.md`
 - `docs/go_no_go_checklist.md`
