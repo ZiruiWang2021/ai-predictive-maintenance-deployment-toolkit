@@ -6,13 +6,13 @@
 
 ## 项目概览
 
-本项目展示一个预测性维护系统如何从设备传感器数据和维护文档出发，生成可解释的维护建议。
+本项目展示一个预测性维护系统如何从设备传感器数据和维护文档出发，生成可解释的维护建议。项目场景设定为类似 Network Rail 的 36 周 AI 预测性维护试点，覆盖 100 个铁路基础设施资产。
 
 系统可以完成：
 
 - 分析设备传感器读数；
 - 预测 Remaining Useful Life（RUL，剩余可用寿命）；
-- 从 synthetic demo 维护手册中检索相关知识；
+- 从 synthetic demo 维护手册、故障案例和项目交付资料中检索相关知识；
 - 将设备风险分为 `Low`、`Medium`、`High` 或 `Unknown`；
 - 使用 ReACT-style Agent 工作流生成结构化维护建议；
 - 通过 FastAPI 提供 API，并通过 Streamlit 展示 dashboard。
@@ -47,13 +47,14 @@ flowchart LR
 
 ## 核心功能
 
-- **RUL 预测**：使用类似 C-MAPSS 的传感器数据训练透明的预测性维护模型。
+- **RUL 预测**：使用类似 C-MAPSS 的时间序列传感器数据训练透明的预测性维护模型。
+- **时间序列特征建模**：基于 rolling window 构建滚动均值、滚动标准差、传感器变化量和退化比例，再进行 RUL 预测。
 - **传感器分析**：识别温度、振动、电流和传感器漂移等异常模式。
-- **RAG 知识库**：从 `data/manuals/` 中的维护文档检索证据。
+- **RAG 知识库**：从 `data/manuals/` 中的维护说明、故障案例和项目交付资料检索证据。
 - **ReACT-style Agent**：显式记录 reasoning、action、observation 和 final answer。
 - **FastAPI 后端**：提供 `/health`、`/rag/query` 和 `/agent/run` 接口。
 - **评估模块**：用透明的规则检查 RAG 和 Agent 输出质量。
-- **部署治理文档**：包含 WBS、risk register、go/no-go checklist、stakeholder map、runbook 和 model card。
+- **部署治理文档**：包含 36 周试点计划、100 资产范围、预算、WBS、risk register、沟通计划、go/no-go checklist、stakeholder map、runbook 和 model card。
 
 ## 技术栈
 
@@ -204,6 +205,7 @@ http://127.0.0.1:8000/docs
 
 - 项目中的传感器数据和维护文档都是 synthetic demo assets。
 - RUL 模型刻意保持轻量和透明，生产环境可能需要更复杂的时间序列模型。
+- 当前“时间序列建模”主要通过 rolling-window 特征工程实现，不是 LSTM/Transformer 类深度序列模型。
 - 当前 RAG retriever 以可复现为主，不追求最高检索性能。
 - Agent 是可维护的 deterministic workflow，没有使用复杂外部编排框架。
 - 输出是决策支持，不替代 OEM 手册、安全流程或专业工程判断。
@@ -235,6 +237,7 @@ http://127.0.0.1:8000/docs
 
 - `docs/blog.md`
 - `docs/architecture.md`
+- `docs/pilot_deployment_plan.md`
 - `docs/deployment_runbook.md`
 - `docs/risk_register.md`
 - `docs/go_no_go_checklist.md`
