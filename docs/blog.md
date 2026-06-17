@@ -10,9 +10,9 @@ A predictive maintenance model can estimate Remaining Useful Life (RUL), but a u
 
 预测性维护模型可以估计 Remaining Useful Life（RUL，剩余可用寿命），但落地应用不能只停留在 notebook。它还需要可复现的数据 pipeline、可理解的 dashboard，以及清晰的运行和治理流程。
 
-This project builds a deployment-oriented toolkit for a Network Rail-style maintenance scenario: predict RUL from sensor histories, highlight high-risk assets, and show how the system could move from pilot to operational decision support.
+This project builds a deployment-oriented toolkit for a Network Rail-style maintenance scenario: a 36-week AI predictive maintenance pilot covering 100 railway infrastructure assets, predicting RUL from sensor histories, highlighting high-risk assets, and showing how the system could move from pilot to operational decision support.
 
-本项目构建了一个面向部署的工具包，场景类似 Network Rail 的资产维护：根据传感器历史预测 RUL，识别高风险设备，并展示系统如何从试点走向运维决策支持。
+本项目构建了一个面向部署的工具包，场景类似 Network Rail 的资产维护：设计一个为期 36 周、覆盖 100 个铁路基础设施资产的 AI 预测性维护试点，根据传感器历史预测 RUL，识别高风险设备，并展示系统如何从试点走向运维决策支持。
 
 ## Why It Matters / 为什么重要
 
@@ -32,11 +32,12 @@ I designed the repo as both a technical demo and a deployment pack:
 
 1. Generate or prepare CMAPSS-style run-to-failure sensor data. / 生成或准备 CMAPSS 风格的 run-to-failure 传感器数据。
 2. Clean and label the data at asset-cycle level. / 按设备和运行周期清洗数据并生成标签。
-3. Build rolling sensor features that capture degradation trends. / 构建滚动传感器特征，捕捉退化趋势。
+3. Build rolling-window time-series features that capture degradation trends. / 构建 rolling-window 时间序列特征，捕捉退化趋势。
 4. Train a transparent RUL regression model. / 训练透明的 RUL 回归模型。
 5. Score the latest record for each asset and assign risk tiers. / 对每个设备最新记录打分，并划分风险等级。
 6. Present the results in a Streamlit dashboard. / 用 Streamlit dashboard 展示结果。
-7. Add delivery artefacts: WBS, risk register, go/no-go checklist, stakeholder map, deployment runbook, and model card. / 增加 WBS、风险登记册、Go/No-Go checklist、stakeholder map、部署 runbook 和 model card。
+7. Add delivery artefacts: 36-week pilot plan, budget, WBS, risk register, communication plan, go/no-go checklist, stakeholder map, deployment runbook, and model card. / 增加 36 周试点计划、预算、WBS、风险登记册、沟通计划、Go/No-Go checklist、stakeholder map、部署 runbook 和 model card。
+8. Add a RAG and Agent layer that retrieves maintenance guidance, fault case notes, and delivery governance documents before generating a cited maintenance recommendation. / 增加 RAG 和 Agent 层，在生成带引用来源的维护建议前检索维护说明、故障案例和项目交付资料。
 
 ## Technical Implementation / 技术实现
 
@@ -46,8 +47,8 @@ The model pipeline is implemented in `src/pdm_toolkit/`:
 
 - `data.py` generates or loads sensor logs, handles cleaning, and adds RUL labels.
 - `data.py` 负责生成或加载传感器日志、清洗数据并添加 RUL 标签。
-- `features.py` builds rolling means, rolling standard deviations, deltas, and engineering proxy features.
-- `features.py` 构建滚动均值、滚动标准差、变化量和工程代理特征。
+- `features.py` builds rolling-window time-series features, including rolling means, rolling standard deviations, deltas, and engineering proxy features.
+- `features.py` 构建 rolling-window 时间序列特征，包括滚动均值、滚动标准差、变化量和工程代理特征。
 - `model.py` trains a ridge regression model using `numpy`, keeping the core algorithm transparent.
 - `model.py` 使用 `numpy` 训练 ridge regression，保持核心算法透明可读。
 - `pipeline.py` orchestrates data generation, training, evaluation, and output creation.
